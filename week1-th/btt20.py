@@ -37,7 +37,7 @@ while True:
         found = False
         for liên_hệ in danh_ba:
             if liên_hệ["sdt"] == sdt_tim:
-                print("Tên của chủ số điện thoại:", liên_hệ["ten"]) [cite: 96]
+                print("Tên của chủ số điện thoại:", liên_hệ["ten"]) 
                 found = True
                 break
         if not found:
