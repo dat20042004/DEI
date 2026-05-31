@@ -1,0 +1,113 @@
+
+Bài 1. Tìm kiếm cơ bản
+Cho mảng a = [1, 3, 5, 7, 9], x = 7, n = 5
+
+Xét đoạn     | Vị trí giữa đoạn          | So sánh với x   | Kết quả
+L=0, R=4     | m=(0+4)/2=2  (a[m]=5)     | a[m]=5 < x=7    | Cập nhật L=m+1=3
+L=3, R=4     | m=(3+4)/2=3  (a[m]=7)     | a[m]=7 = x      | Dừng, trả về vị trí m=3
+
+ Kết quả: Tìm thấy x=7 tại vị trí 3.
+
+
+
+Bài 2. Kiểm tra tồn tại
+Cho mảng a = [2, 4, 6, 8], x = 5, n = 4
+
+Xét đoạn     | Vị trí giữa đoạn          | So sánh với x   | Kết quả
+L=0, R=3     | m=(0+3)/2=1  (a[m]=4)     | a[m]=4 < x=5    | Cập nhật L=m+1=2
+L=2, R=3     | m=(2+3)/2=2  (a[m]=6)     | a[m]=6 > x=5    | Cập nhật R=m-1=1
+L=2, R=1     | L > R                      | —               | Dừng, không tìm thấy
+
+Kết quả: x=5 không có trong mảng → false
+
+
+
+Bài 3. Vị trí xuất hiện đầu tiên
+Cho mảng a = [1, 2, 2, 2, 3], x = 2, n = 5
+Ý tưởng: Khi tìm thấy a[m]=x, ghi lại vị trí rồi tìm tiếp bên trái (R=m-1).
+
+Xét đoạn     | Vị trí giữa     | So sánh   | Kết quả
+L=0, R=4     | m=2  (a[m]=2)   | a[m]=x    | Ghi lại result=2, tìm tiếp bên trái R=1
+L=0, R=1     | m=0  (a[m]=1)   | a[m]<x    | Cập nhật L=1
+L=1, R=1     | m=1  (a[m]=2)   | a[m]=x    | Ghi lại result=1, tìm tiếp bên trái R=0
+L=1, R=0     | L > R            | —         | Dừng
+
+ Kết quả: Vị trí đầu tiên của x=2 là 1.
+
+
+
+Bài 4. Vị trí xuất hiện cuối cùng
+Cho mảng a = [1, 2, 2, 2, 3], x = 2, n = 5
+Ý tưởng: Khi tìm thấy a[m]=x, ghi lại vị trí rồi tìm tiếp bên phải (L=m+1).
+
+Xét đoạn     | Vị trí giữa     | So sánh   | Kết quả
+L=0, R=4     | m=2  (a[m]=2)   | a[m]=x    | Ghi lại result=2, tìm tiếp bên phải L=3
+L=3, R=4     | m=3  (a[m]=2)   | a[m]=x    | Ghi lại result=3, tìm tiếp bên phải L=4
+L=4, R=4     | m=4  (a[m]=3)   | a[m]>x    | Cập nhật R=3
+L=4, R=3     | L > R            | —         | Dừng
+
+Kết quả: Vị trí cuối cùng của x=2 là 3.
+
+
+
+Bài 5. Đếm số lần xuất hiện
+Cho mảng a = [1, 2, 2, 2, 3], x = 2
+Ý tưởng: Tìm vị trí đầu tiên (first=1) và vị trí cuối cùng (last=3) của x.
+  Số lần xuất hiện = last - first + 1 = 3 - 1 + 1 = 3
+
+→ Kết quả: x=2 xuất hiện 3 lần.
+
+
+
+Bài 6. Lower Bound
+Cho mảng a = [1, 3, 5, 7], x = 4, n = 4
+Ý tưởng: Tìm vị trí nhỏ nhất mà a[m] >= x. Khi a[m] >= x, ghi lại rồi tìm tiếp bên trái.
+
+Xét đoạn     | Vị trí giữa     | So sánh       | Kết quả
+L=0, R=3     | m=1  (a[m]=3)   | a[m]=3 < x=4  | Cập nhật L=2
+L=2, R=3     | m=2  (a[m]=5)   | a[m]=5 >= x=4 | Ghi lại result=2, tìm bên trái R=1
+L=2, R=1     | L > R            | —             | Dừng
+
+ Kết quả: Lower Bound = 2  (a[2]=5 là phần tử nhỏ nhất ≥ 4)
+
+
+
+Bài 7. Upper Bound
+Cho mảng a = [1, 3, 5, 7], x = 5, n = 4
+Ý tưởng: Tìm vị trí nhỏ nhất mà a[m] > x. Khi a[m] > x, ghi lại rồi tìm tiếp bên trái.
+
+Xét đoạn     | Vị trí giữa     | So sánh         | Kết quả
+L=0, R=3     | m=1  (a[m]=3)   | a[m]=3 <= x=5   | Cập nhật L=2
+L=2, R=3     | m=2  (a[m]=5)   | a[m]=5 <= x=5   | Cập nhật L=3
+L=3, R=3     | m=3  (a[m]=7)   | a[m]=7 > x=5    | Ghi lại result=3, tìm bên trái R=2
+L=3, R=2     | L > R            | —               | Dừng
+
+Kết quả: Upper Bound = 3  (a[3]=7 là phần tử nhỏ nhất > 5)
+
+
+
+Bài 8. Căn bậc hai nguyên
+Cho n = 8
+Ý tưởng: Tìm kiếm nhị phân trong đoạn [0, n], tìm số m lớn nhất mà m*m <= n.
+
+Xét đoạn     | Vị trí giữa     | So sánh     | Kết quả
+L=0, R=8     | m=4  (4*4=16)   | 16 > 8      | Cập nhật R=3
+L=0, R=3     | m=1  (1*1=1)    | 1 <= 8      | Ghi lại result=1, L=2
+L=2, R=3     | m=2  (2*2=4)    | 4 <= 8      | Ghi lại result=2, L=3
+L=3, R=3     | m=3  (3*3=9)    | 9 > 8       | Cập nhật R=2
+L=3, R=2     | L > R            | —           | Dừng
+
+Kết quả: Căn bậc hai nguyên của 8 = 2
+
+
+
+Bài 9. Vị trí chèn
+Cho mảng a = [1, 3, 5, 6], x = 4, n = 4
+Ý tưởng: Tìm vị trí đầu tiên mà a[m] >= x (giống Lower Bound). Nếu không có thì trả về n.
+
+Xét đoạn     | Vị trí giữa     | So sánh         | Kết quả
+L=0, R=3     | m=1  (a[m]=3)   | a[m]=3 < x=4    | Cập nhật L=2
+L=2, R=3     | m=2  (a[m]=5)   | a[m]=5 >= x=4   | Ghi lại result=2, tìm bên trái R=1
+L=2, R=1     | L > R            | —               | Dừng
+
+Kết quả: Nên chèn x=4 vào vị trí 2 để giữ thứ tự tăng dần.
