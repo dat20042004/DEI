@@ -1,0 +1,13 @@
+def insertion_s(arr):      # định nghĩa hàm sắp xếp chèn
+    for i in range(1,len(arr)):  # Vòng lặp ngoài chạy từ phần tử thứ 2 đến hết mảng 
+        key=arr[i]   #Lấy giá trị chèn là biến tên key lưu giá trị phần tử hiện tại ( cần đc chèn vào đúng vị trí)
+
+        j=i-1  # xác định vị trí chèn j là chỉ số ptu đứng trước key ta so sánh key với j trở về phía trước nó
+        while j>=0 and key<arr[j]: #Vòng lặp chạy dịch chuyển nếu key lớn hơn phần tử phía trước và nhỏ hơn phần mảng thì dịch chuyển sang phải 1 đơn vị
+            arr[j+1]=arr[j] #
+            j-=1
+        arr[j+1]=key
+arr=[12,11,13,5,6]
+insertion_s(arr)
+for i in range(len(arr)):
+    print("%d" %arr[i])
