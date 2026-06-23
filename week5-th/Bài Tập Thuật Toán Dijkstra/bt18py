@@ -1,0 +1,39 @@
+import heapq
+
+def run_dijkstra_with_negative_edge():
+    # Đồ thị mô phỏng có cạnh âm từ Bài 18: 0->1(2), 0->2(5), 2->1(-4)
+    adj = [
+        [(1, 2), (2, 5)], # Đỉnh 0
+        [],               # Đỉnh 1
+        [(1, -4)]         # Đỉnh 2
+    ]
+    
+    # Chạy Dijkstra thông thường để xem kết quả sai biệt
+    dist = [float('inf')] * 3
+    dist[0] = 0
+    pq = [(0, 0)]
+    while pq:
+        d, u = heapq.heappop(pq)
+        if d > dist[u]: continue
+        for v, w in adj[u]:
+            if dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                heapq.heappush(pq, (dist[v], v))
+    print("Kết quả SAI của Dijkstra (do chốt đỉnh 1 quá sớm):", dist)
+
+def bellman_ford_replacement(edges, V, s):
+    # Thuật toán thay thế giải quyết bài toán cạnh âm chính xác
+    dist = [float('inf')] * V
+    dist[s] = 0
+    
+    for _ in range(V - 1):
+        for u, v, w in edges:
+            if dist[u] != float('inf') and dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                
+    return dist
+
+if __name__ == "__main__":
+    run_dijkstra_with_negative_edge()
+    edge_list = [(0, 1, 2), (0, 2, 5), (2, 1, -4)]
+    print("Kết quả ĐÚNG từ Bellman-Ford:", bellman_ford_replacement(edge_list, 3, 0))
